@@ -1,0 +1,25 @@
+{
+    "name": "liquidpineapple/color",
+    "description": "A micro PHP package to convert and alter colors! 🌈",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^6.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jesse Kramer",
+            "email": "kram0021@hz.nl"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"Liquidpineapple\\": "src/"}
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {}
+}
