@@ -94,7 +94,7 @@ class Color {
         return $this;
     }
 
-    public function saturize($amount)
+    public function saturate($amount)
     {
         if ($amount < 0 || $amount > 100) throw new InvalidArgumentException('The given amount must be between 0 and 100');
         $amount /= 100;
@@ -102,7 +102,7 @@ class Color {
         return $this;
     }
 
-    public function desaturize($amount)
+    public function desaturate($amount)
     {
         if ($amount < 0 || $amount > 100) throw new InvalidArgumentException('The given amount must be between 0 and 100');
         $amount /= 100;
