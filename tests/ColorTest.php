@@ -19,7 +19,7 @@ final class ColorTest extends TestCase
         Color::fromHEX('#12');
     }
 
-    public function testColorConversionFromRGB()
+    public function testColorConversionFromRgb()
     {
         $hsl = Color::fromRGB(30, 144, 255)->toHSL();
         $this->assertEquals([210, 100, 56], $hsl);
@@ -28,7 +28,7 @@ final class ColorTest extends TestCase
         Color::fromRGB(-10, 300, 100);
     }
 
-    public function testColorConversionFromHSL()
+    public function testColorConversionFromHsl()
     {
         $hsl = Color::fromHSL(210, 100, 56)->toHSL();
         $this->assertEquals([210, 100, 56], $hsl);
@@ -37,12 +37,30 @@ final class ColorTest extends TestCase
         Color::fromHSL(-10, 300, 100);
     }
 
-    public function testColorConversionFromHSV()
+    public function testColorConversionFromHsv()
     {
         $hsl = Color::fromHSV(210, 88, 100.0)->toHSL();
         $this->assertEquals([210, 100, 56], $hsl);
 
         $this->expectException(InvalidArgumentException::class);
         Color::fromHSV(-10, 300, 100);
+    }
+
+    public function testColorConversionToRgb()
+    {
+        $rgb = Color::fromRGB(123, 123, 123)->toRGB();
+        $this->assertEquals([123, 123, 123], $rgb);
+
+        $rgbString = Color::fromRGB(123, 123, 123)->toRGBString();
+        $this->assertEquals('rgb(123, 123, 123)', $rgbString);
+    }
+
+    public function testColorConversionToHex()
+    {
+        $hex = Color::fromHEX('#1E90FF')->toHEX();
+        $this->assertEquals('#1E90FF', $hex);
+
+        $hexString = Color::fromHEX('#1E90FF')->toHEXString();
+        $this->assertEquals('#1E90FF', $hexString);
     }
 }

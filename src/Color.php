@@ -271,12 +271,97 @@ class Color
     /**
      * Outputs the color using the HSL format.
      *
-     * @return string HSL representation of the color using CSS syntax
+     * @return string HSL representation of the color using CSS format
      */
     public function toHSLString()
     {
         $hsl = $this->toHSL();
 
         return "hsl($hsl[0], $hsl[1], $hsl[2])";
+    }
+
+    /**
+     * Outputs the color using the RGB format.
+     *
+     * @return array RGB representation of the color
+     */
+    public function toRGB()
+    {
+        $h = $this->hue;
+        $s = $this->saturation / 100;
+        $l = $this->lightness / 100;
+        $r;
+        $g;
+        $b;
+    	$c = ( 1 - abs( 2 * $l - 1 ) ) * $s;
+    	$x = $c * ( 1 - abs( fmod( ( $h / 60 ), 2 ) - 1 ) );
+    	$m = $l - ( $c / 2 );
+    	if ( $h < 60 ) {
+    		$r = $c;
+    		$g = $x;
+    		$b = 0;
+    	} else if ( $h < 120 ) {
+    		$r = $x;
+    		$g = $c;
+    		$b = 0;
+    	} else if ( $h < 180 ) {
+    		$r = 0;
+    		$g = $c;
+    		$b = $x;
+    	} else if ( $h < 240 ) {
+    		$r = 0;
+    		$g = $x;
+    		$b = $c;
+    	} else if ( $h < 300 ) {
+    		$r = $x;
+    		$g = 0;
+    		$b = $c;
+    	} else {
+    		$r = $c;
+    		$g = 0;
+    		$b = $x;
+    	}
+    	$r = ( $r + $m ) * 255;
+    	$g = ( $g + $m ) * 255;
+    	$b = ( $b + $m  ) * 255;
+
+        return [
+            round($r),
+            round($g),
+            round($b),
+        ];
+    }
+
+    /**
+     * Outputs the color using the RGB format.
+     *
+     * @return string RGB representation of the color using CSS format
+     */
+    public function toRGBString()
+    {
+        $rgb = $this->toRGB();
+
+        return "rgb($rgb[0], $rgb[1], $rgb[2])";
+    }
+
+    /**
+     * Outputs the color using the HEX format.
+     *
+     * @return array HEX representation of the color
+     */
+    public function toHEX()
+    {
+        $rgb = $this->toRGB();
+        return strtoupper(sprintf("#%02x%02x%02x", $rgb[0], $rgb[1], $rgb[2]));
+    }
+
+    /**
+     * Outputs the color using the HEX format.
+     *
+     * @return string HEX representation of the color using CSS format
+     */
+    public function toHEXString()
+    {
+        return $this->toHEX();
     }
 }
