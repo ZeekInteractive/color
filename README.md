@@ -2,6 +2,12 @@
 
 <p align="center">
 <a href="https://travis-ci.org/liquidpineapple/color"><img src="https://travis-ci.org/liquidpineapple/color.svg" alt="Build Status"></a>
+<a href="https://styleci.io/repos/94641763"><img src="https://styleci.io/repos/94641763/shield?branch=master" alt="StyleCI"></a>
+</p>
+<p align="center">
+<a href="https://waffle.io/liquidpineapple/color?utm_source=badge"><img src="https://badge.waffle.io/liquidpineapple/color.png?label=ready&title=Ready" alt="Stories in Ready" /></a>
+<a href="https://waffle.io/liquidpineapple/color?utm_source=badge"><img src="https://badge.waffle.io/liquidpineapple/color.png?label=In%20Progress&title=In%20Progress" alt="Stories in Progress" /></a>
+<a href="https://waffle.io/liquidpineapple/color?utm_source=badge"><img src="https://badge.waffle.io/liquidpineapple/color.png?label=done&title=Done" alt="Stories in Done" /></a>
 </p>
 
 A micro PHP package to convert and alter colors! 🔥
