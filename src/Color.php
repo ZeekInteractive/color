@@ -195,7 +195,7 @@ class Color
             throw new InvalidArgumentException('The given amount must be between 0 and 100');
         }
         $amount /= 100;
-        $this->lightness += (1 - $this->lightness) * $amount;
+        $this->lightness += (100 - $this->lightness) * $amount;
 
         return $this;
     }
@@ -231,7 +231,7 @@ class Color
             throw new InvalidArgumentException('The given amount must be between 0 and 100');
         }
         $amount /= 100;
-        $this->saturation += (1 - $this->saturation) * $amount;
+        $this->saturation += (100 - $this->saturation) * $amount;
 
         return $this;
     }

@@ -63,4 +63,40 @@ final class ColorTest extends TestCase
         $hexString = Color::fromHEX('#1E90FF')->toHEXString();
         $this->assertEquals('#1E90FF', $hexString);
     }
+
+    public function testColorConversionToHsl()
+    {
+        $hsl = Color::fromHSL(200, 80, 40)->toHSL();
+        $this->assertEquals([200, 80, 40], $hsl);
+
+        $hslString = Color::fromHSL(200, 80, 40)->toHSLString();
+        $this->assertEquals('hsl(200, 80, 40)', $hslString);
+    }
+
+    //TODO: conversion to hsv
+
+    public function testColorAlterationDarken()
+    {
+        $darkColor = Color::fromHEX('#1E90FF')->darken(10)->toHEX();
+        $this->assertEquals('#0182FF', $darkColor);
+    }
+
+    public function testColorAlterationLighten()
+    {
+        $lightColor = Color::fromHEX('#1E90FF')->lighten(10)->toHEX();
+        $this->assertEquals('#359BFF', $lightColor);
+    }
+
+    public function testColorAlterationSaturate()
+    {
+        $exitingColor = Color::fromHEX('#1E90FF')->saturate(10)->toHEX();
+        $this->assertEquals('#1E90FF', $exitingColor);
+    }
+
+    public function testColorAlterationDesaturate()
+    {
+        $dullColor = Color::fromHEX('#1E90FF')->desaturate(10)->toHEX();
+        $this->assertEquals('#2990F4', $dullColor);
+    }
+
 }
