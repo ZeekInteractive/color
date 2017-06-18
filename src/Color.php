@@ -6,10 +6,30 @@ use InvalidArgumentException;
 
 class Color {
 
+    /**
+     * @var int $hue (0-360), The H-value in HSL
+     */
     private $hue;
+
+    /**
+     * @var int $saturation (0-100), The S-value in HSL
+     */
     private $saturation;
+
+    /**
+     * @var int $lightness (0-100), The L-value in HSL
+     */
     private $lightness;
 
+    /**
+     * Creates a Color instance
+     *
+     * @param int|null $hue (0-360) The hue of the color (format: HSL)
+     * @param int|null $saturation (0-100) The saturation of the color (format: HSL)
+     * @param int|null $lightness (0-100) The lightness of the color (format: HSL)
+     *
+     * @return void
+     */
     public function __construct($hue = 0, $saturation = 0, $lightness = 0)
     {
         $this->hue = $hue;
@@ -17,6 +37,15 @@ class Color {
         $this->lightness = $lightness;
     }
 
+    /**
+     * Creates a Color instance based on the given RGB-formatted color
+     *
+     * @param int $red (0-255) The red value of the given color
+     * @param int $green (0-255) The green value of the given color
+     * @param int $blue (0-255) The blue value of the given color
+     *
+     * @return Color
+     */
     public static function fromRGB($red, $green, $blue)
     {
         if ($red < 0 || $red > 255) throw new InvalidArgumentException('Value $red can only be 0 to 255');
@@ -46,6 +75,13 @@ class Color {
         }
     }
 
+    /**
+     * Creates a Color instance based on the given Hexadecimal-formatted color
+     *
+     * @param string $hex A hexadecimal color value, the # isn't required but can be given
+     *
+     * @return Color
+     */
     public static function fromHEX($hex)
     {
         $hex = preg_replace("/[^0-9A-Fa-f]/", '', $hex);
@@ -65,7 +101,15 @@ class Color {
         return self::fromRGB($rgb['red'], $rgb['green'], $rgb['blue']);
     }
 
-
+    /**
+     * Creates a Color instance based on the given HSV-formatted color
+     *
+     * @param int $hue (0-360) The hue of the color (format: HSV)
+     * @param int $saturation (0-100) The saturation of the color (format: HSV)
+     * @param int $value (0-100) The value of the color (format: HSV)
+     *
+     * @return Color
+     */
     public static function fromHSV($hue, $saturation, $value)
     {
         if ($hue < 0 || $hue > 360) throw new InvalidArgumentException('Value $hue can only be 0 to 360');
@@ -102,6 +146,15 @@ class Color {
         return self::fromRGB($red, $green, $blue);
     }
 
+    /**
+     * Creates a Color instance based on the given HSL-formatted color
+     *
+     * @param int $hue (0-360) The hue of the color (format: HSL)
+     * @param int $saturation (0-100) The saturation of the color (format: HSL)
+     * @param int $lightness (0-100) The lightness of the color (format: HSL)
+     *
+     * @return Color
+     */
     public static function fromHSL($hue, $saturation, $lightness)
     {
         if ($hue < 0 || $hue > 360) throw new InvalidArgumentException('Value $hue can only be 0 to 360');
@@ -110,6 +163,13 @@ class Color {
         return new self($hue, $saturation, $lightness);
     }
 
+    /**
+     * Alters the color by lightening it with the given percentage
+     *
+     * @param int $amount (0-100) Percentage with which to lighten the color
+     *
+     * @return Color
+     */
     public function lighten($amount)
     {
         if ($amount < 0 || $amount > 100) throw new InvalidArgumentException('The given amount must be between 0 and 100');
@@ -118,6 +178,13 @@ class Color {
         return $this;
     }
 
+    /**
+     * Alters the color by darkening it with the given percentage
+     *
+     * @param int $amount (0-100) Percentage with which to darken the color
+     *
+     * @return Color
+     */
     public function darken($amount)
     {
         if ($amount < 0 || $amount > 100) throw new InvalidArgumentException('The given amount must be between 0 and 100');
@@ -126,6 +193,13 @@ class Color {
         return $this;
     }
 
+    /**
+     * Alters the color by saturating it with the given percentage
+     *
+     * @param int $amount (0-100) Percentage with which to saturate the color
+     *
+     * @return Color
+     */
     public function saturate($amount)
     {
         if ($amount < 0 || $amount > 100) throw new InvalidArgumentException('The given amount must be between 0 and 100');
@@ -134,6 +208,13 @@ class Color {
         return $this;
     }
 
+    /**
+     * Alters the color by desaturating it with the given percentage
+     *
+     * @param int $amount (0-100) Percentage with which to desaturate the color
+     *
+     * @return Color
+     */
     public function desaturate($amount)
     {
         if ($amount < 0 || $amount > 100) throw new InvalidArgumentException('The given amount must be between 0 and 100');
@@ -142,6 +223,11 @@ class Color {
         return $this;
     }
 
+    /**
+     * Outputs the color using the HSL format
+     *
+     * @return array HSL representation of the color
+     */
     public function toHSL()
     {
         return [
@@ -151,6 +237,11 @@ class Color {
         ];
     }
 
+    /**
+     * Outputs the color using the HSL format
+     *
+     * @return string HSL representation of the color using CSS syntax
+     */
     public function toHSLString()
     {
         $hsl = $this->toHSL();
