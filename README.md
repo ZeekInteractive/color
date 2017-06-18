@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/liquidpineapple/color.png?label=ready&title=Ready)](https://waffle.io/liquidpineapple/color?utm_source=badge)
 <p align="center"><strong>liquidpineapple/color</strong> 🌈</p>
 
 <p align="center">
