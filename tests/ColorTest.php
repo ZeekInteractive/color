@@ -96,6 +96,12 @@ final class ColorTest extends TestCase
         $hsv = Color::fromHSV(310, 80, 40)->toHSV();
         $this->assertEquals([310, 80, 40], $hsv);
 
+        $hsv = Color::fromHSV(0, 0, 0)->toHSV();
+        $this->assertEquals([0, 0, 0], $hsv);
+
+        $hsv = Color::fromHSV(26, 68, 68)->toHSV();
+        $this->assertEquals([26, 68, 68], $hsv);
+
         $hsvString = Color::fromHSV(200, 80, 40)->toHSVString();
         $this->assertEquals('hsv(200, 80, 40)', $hsvString);
     }
