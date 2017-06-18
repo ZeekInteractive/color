@@ -4,8 +4,8 @@ namespace Liquidpineapple;
 
 use InvalidArgumentException;
 
-class Color {
-
+class Color
+{
     private $hue;
     private $saturation;
     private $lightness;
@@ -19,9 +19,15 @@ class Color {
 
     public static function fromRGB($red, $green, $blue)
     {
-        if ($red < 0 || $red > 255) throw new InvalidArgumentException('Value $red can only be 0 to 255');
-        if ($green < 0 || $green > 255) throw new InvalidArgumentException('Value $green can only be 0 to 255');
-        if ($blue < 0 || $blue > 255) throw new InvalidArgumentException('Value $blue can only be 0 to 255');
+        if ($red < 0 || $red > 255) {
+            throw new InvalidArgumentException('Value $red can only be 0 to 255');
+        }
+        if ($green < 0 || $green > 255) {
+            throw new InvalidArgumentException('Value $green can only be 0 to 255');
+        }
+        if ($blue < 0 || $blue > 255) {
+            throw new InvalidArgumentException('Value $blue can only be 0 to 255');
+        }
         $red /= 255;
         $green /= 255;
         $blue /= 255;
@@ -35,20 +41,21 @@ class Color {
             // Achromatic
             return new self($hue, $saturation * 100, $lightness * 100);
         } else {
-            $saturation = $delta / ( 1 - abs( 2 * $lightness - 1 ) );
-            $hue = ($max == $green) ? 60 * ( ( $blue - $red ) / $delta + 2 ) : $hue;
-            $hue = ($max == $blue) ? 60 * ( ( $red - $green ) / $delta + 4 ) : $hue;
+            $saturation = $delta / (1 - abs(2 * $lightness - 1));
+            $hue = ($max == $green) ? 60 * (($blue - $red) / $delta + 2) : $hue;
+            $hue = ($max == $blue) ? 60 * (($red - $green) / $delta + 4) : $hue;
             if ($max == $red) {
                 $x = ($blue > green) ? 360 : 0;
-                $hue = 60 * fmod( ( ( $green - $blue ) / $delta ), 6 ) + $x;
+                $hue = 60 * fmod((($green - $blue) / $delta), 6) + $x;
             }
+
             return new self($hue, $saturation * 100, $lightness * 100);
         }
     }
 
     public static function fromHEX($hex)
     {
-        $hex = preg_replace("/[^0-9A-Fa-f]/", '', $hex);
+        $hex = preg_replace('/[^0-9A-Fa-f]/', '', $hex);
         $rgb = [];
         if (strlen($hex) == 6) {
             $colorVal = hexdec($hex);
@@ -62,16 +69,21 @@ class Color {
         } else {
             throw new InvalidArgumentException('Given color does not adhere to hexadecimal format');
         }
+
         return self::fromRGB($rgb['red'], $rgb['green'], $rgb['blue']);
     }
 
-
     public static function fromHSV($hue, $saturation, $value)
     {
-        if ($hue < 0 || $hue > 360) throw new InvalidArgumentException('Value $hue can only be 0 to 360');
-        if ($saturation < 0 || $saturation > 100) throw new InvalidArgumentException('Value $saturation can only be 0 to 100');
-        if ($value < 0 || $value > 100) throw new InvalidArgumentException('Value $value can only be 0 to 100');
-
+        if ($hue < 0 || $hue > 360) {
+            throw new InvalidArgumentException('Value $hue can only be 0 to 360');
+        }
+        if ($saturation < 0 || $saturation > 100) {
+            throw new InvalidArgumentException('Value $saturation can only be 0 to 100');
+        }
+        if ($value < 0 || $value > 100) {
+            throw new InvalidArgumentException('Value $value can only be 0 to 100');
+        }
         $hue /= 360;
         $saturation /= 100;
         $value /= 100;
@@ -84,8 +96,7 @@ class Color {
         $N = $value * (1 - $saturation * $F);
         $K = $value * (1 - $saturation * (1 - $F));
 
-        switch($I)
-        {
+        switch ($I) {
             case 0: list($red, $green, $blue) = [$value, $K, $M]; break;
             case 1: list($red, $green, $blue) = [$N, $value, $M]; break;
             case 2: list($red, $green, $blue) = [$M, $value, $K]; break;
@@ -104,41 +115,59 @@ class Color {
 
     public static function fromHSL($hue, $saturation, $lightness)
     {
-        if ($hue < 0 || $hue > 360) throw new InvalidArgumentException('Value $hue can only be 0 to 360');
-        if ($saturation < 0 || $saturation > 100) throw new InvalidArgumentException('Value $saturation can only be 0 to 100');
-        if ($lightness < 0 || $lightness > 100) throw new InvalidArgumentException('Value $lightness can only be 0 to 100');
+        if ($hue < 0 || $hue > 360) {
+            throw new InvalidArgumentException('Value $hue can only be 0 to 360');
+        }
+        if ($saturation < 0 || $saturation > 100) {
+            throw new InvalidArgumentException('Value $saturation can only be 0 to 100');
+        }
+        if ($lightness < 0 || $lightness > 100) {
+            throw new InvalidArgumentException('Value $lightness can only be 0 to 100');
+        }
         return new self($hue, $saturation, $lightness);
     }
 
     public function lighten($amount)
     {
-        if ($amount < 0 || $amount > 100) throw new InvalidArgumentException('The given amount must be between 0 and 100');
+        if ($amount < 0 || $amount > 100) {
+            throw new InvalidArgumentException('The given amount must be between 0 and 100');
+        }
         $amount /= 100;
         $this->lightness += (1 - $this->lightness) * $amount;
+
         return $this;
     }
 
     public function darken($amount)
     {
-        if ($amount < 0 || $amount > 100) throw new InvalidArgumentException('The given amount must be between 0 and 100');
+        if ($amount < 0 || $amount > 100) {
+            throw new InvalidArgumentException('The given amount must be between 0 and 100');
+        }
         $amount /= 100;
         $this->lightness -= $this->lightness * $amount;
+
         return $this;
     }
 
     public function saturate($amount)
     {
-        if ($amount < 0 || $amount > 100) throw new InvalidArgumentException('The given amount must be between 0 and 100');
+        if ($amount < 0 || $amount > 100) {
+            throw new InvalidArgumentException('The given amount must be between 0 and 100');
+        }
         $amount /= 100;
         $this->saturation += (1 - $this->saturation) * $amount;
+
         return $this;
     }
 
     public function desaturate($amount)
     {
-        if ($amount < 0 || $amount > 100) throw new InvalidArgumentException('The given amount must be between 0 and 100');
+        if ($amount < 0 || $amount > 100) {
+            throw new InvalidArgumentException('The given amount must be between 0 and 100');
+        }
         $amount /= 100;
         $this->saturation -= $this->saturation * $amount;
+
         return $this;
     }
 
@@ -154,6 +183,7 @@ class Color {
     public function toHSLString()
     {
         $hsl = $this->toHSL();
+
         return "hsl($hsl[0], $hsl[1], $hsl[2])";
     }
 }
