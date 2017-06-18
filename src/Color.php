@@ -65,9 +65,41 @@ class Color {
         return self::fromRGB($rgb['red'], $rgb['green'], $rgb['blue']);
     }
 
+
     public static function fromHSV($hue, $saturation, $value)
     {
-        return new self($hue, $saturation, $lightness);
+        if ($hue < 0 || $hue > 360) throw new InvalidArgumentException('Value $hue can only be 0 to 360');
+        if ($saturation < 0 || $saturation > 100) throw new InvalidArgumentException('Value $saturation can only be 0 to 100');
+        if ($value < 0 || $value > 100) throw new InvalidArgumentException('Value $value can only be 0 to 100');
+
+        $hue /= 360;
+        $saturation /= 100;
+        $value /= 100;
+
+        $H = $hue * 6;
+        $I = floor($H);
+        $F = $H - $I;
+
+        $M = $value * (1 - $saturation);
+        $N = $value * (1 - $saturation * $F);
+        $K = $value * (1 - $saturation * (1 - $F));
+
+        switch($I)
+        {
+            case 0: list($red, $green, $blue) = [$value, $K, $M]; break;
+            case 1: list($red, $green, $blue) = [$N, $value, $M]; break;
+            case 2: list($red, $green, $blue) = [$M, $value, $K]; break;
+            case 3: list($red, $green, $blue) = [$M, $N, $value]; break;
+            case 4: list($red, $green, $blue) = [$K, $M, $value]; break;
+            case 5:
+            case 6: list($red, $green, $blue) = [$value, $M, $N]; break;
+        }
+
+        $red *= 255;
+        $green *= 255;
+        $blue *= 255;
+
+        return self::fromRGB($red, $green, $blue);
     }
 
     public static function fromHSL($hue, $saturation, $lightness)
