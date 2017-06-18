@@ -281,25 +281,25 @@ class Color
         $r;
         $g;
         $b;
-    	$c = ( 1 - abs( 2 * $l - 1 ) ) * $s;
-    	$x = $c * ( 1 - abs( fmod( ( $h / 60 ), 2 ) - 1 ) );
-    	$m = $l - ( $c / 2 );
-    	if ( $h < 60 ) {
+        $c = (1 - abs(2 * $l - 1)) * $s;
+        $x = $c * (1 - abs(fmod(($h / 60), 2) - 1));
+        $m = $l - ($c / 2);
+        if ($h < 60) {
             list($r, $g, $b) = [$c, $x, 0];
-    	} else if ( $h < 120 ) {
+        } elseif ($h < 120) {
             list($r, $g, $b) = [$x, $c, 0];
-    	} else if ( $h < 180 ) {
+        } elseif ($h < 180) {
             list($r, $g, $b) = [0, $c, $x];
-    	} else if ( $h < 240 ) {
+        } elseif ($h < 240) {
             list($r, $g, $b) = [0, $x, $c];
-    	} else if ( $h < 300 ) {
+        } elseif ($h < 300) {
             list($r, $g, $b) = [$x, 0, $c];
-    	} else {
+        } else {
             list($r, $g, $b) = [$c, 0, $x];
-    	}
-    	$r = ( $r + $m ) * 255;
-    	$g = ( $g + $m ) * 255;
-    	$b = ( $b + $m  ) * 255;
+        }
+        $r = ($r + $m) * 255;
+        $g = ($g + $m) * 255;
+        $b = ($b + $m) * 255;
 
         return [
             round($r),
@@ -316,6 +316,7 @@ class Color
     public function toRGBString()
     {
         list($red, $green, $blue) = $this->toRGB();
+
         return "rgb($red, $green, $blue)";
     }
 
@@ -327,7 +328,8 @@ class Color
     public function toHEX()
     {
         list($red, $green, $blue) = $this->toRGB();
-        return strtoupper(sprintf("#%02x%02x%02x", $red, $green, $blue));
+
+        return strtoupper(sprintf('#%02x%02x%02x', $red, $green, $blue));
     }
 
     /**
@@ -358,36 +360,38 @@ class Color
 
         $value = 100 * $maxRGB;
 
-        if ($chroma == 0)
+        if ($chroma == 0) {
             return [0, 0, $value];
+        }
 
         $saturation = 100 * ($chroma / $maxRGB);
 
-        if ($red == $minRGB)
+        if ($red == $minRGB) {
             $h = 3 - (($green - $blue) / $chroma);
-        elseif ($blue == $minRGB)
+        } elseif ($blue == $minRGB) {
             $h = 1 - (($red - $green) / $chroma);
-        else
+        } else {
             $h = 5 - (($blue - $red) / $chroma);
+        }
 
         $hue = 60 * $h;
 
         return [
             round($hue),
             round($saturation),
-            round($value)
+            round($value),
         ];
     }
 
-    /**
-     * Outputs the color using the HSV format.
-     *
-     * @return string HSV representation of the color using CSS format
-     */
+     /**
+      * Outputs the color using the HSV format.
+      *
+      * @return string HSV representation of the color using CSS format
+      */
      public function toHSVString()
      {
          list($hue, $saturation, $value) = $this->toHSV();
+
          return "hsv($hue, $saturation, $value)";
      }
-
 }
