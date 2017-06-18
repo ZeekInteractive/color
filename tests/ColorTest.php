@@ -54,6 +54,12 @@ final class ColorTest extends TestCase
         $rgb = Color::fromRGB(200, 123, 123)->toRGB();
         $this->assertEquals([200, 123, 123], $rgb);
 
+        $rgb = Color::fromRGB(0, 255, 43)->toRGB();
+        $this->assertEquals([0, 255, 43], $rgb);
+
+        $rgb = Color::fromRGB(85, 255, 0)->toRGB();
+        $this->assertEquals([85, 255, 0], $rgb);
+
         $rgbString = Color::fromRGB(123, 123, 123)->toRGBString();
         $this->assertEquals('rgb(123, 123, 123)', $rgbString);
     }

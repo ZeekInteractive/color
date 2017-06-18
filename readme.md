@@ -10,12 +10,25 @@
 <a href="https://waffle.io/liquidpineapple/color?utm_source=badge"><img src="https://badge.waffle.io/liquidpineapple/color.png?label=In%20Progress&title=In%20Progress" alt="Stories in Progress" /></a>
 <a href="https://waffle.io/liquidpineapple/color?utm_source=badge"><img src="https://badge.waffle.io/liquidpineapple/color.png?label=done&title=Done" alt="Stories in Done" /></a>
 </p>
-
+<p align="center">
 A micro PHP package to convert and alter colors! 🔥
+</p>
 
-> **Warning:** This package is a work in progress.
->
-> This package is not yet on version 1.0, and thus not ready for production
+Contents of this document:
+
+* [Installation](#installation)
+* [Documentation](#documentation)
+* [Contributing](#contributing)
+
+# Installation
+
+You can install this package through composer. To install the latest version in to your project use the following command:
+
+```bash
+composer require liquidpineapple/color
+```
+
+This package required PHP 7.0 or higher.
 
 # Documentation
 
@@ -122,3 +135,15 @@ $exitingColor = Color::fromHEX('#C44')->saturate(10)->toHEX();
 // #D33C3C
 
 ```
+
+# Contributing
+
+Did we miss something, or do you have cool ideas? Feel free to contribute!
+
+How to contribute:
+
+1. Fork this repository.
+2. Write code (with comments).
+3. Write tests (100% coverage).
+4. Create a pull-request.
+5. Profit!
