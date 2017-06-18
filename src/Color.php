@@ -48,14 +48,10 @@ class Color
      */
     public static function fromRGB($red, $green, $blue)
     {
-        if ($red < 0 || $red > 255) {
-            throw new InvalidArgumentException('Value $red can only be 0 to 255');
-        }
-        if ($green < 0 || $green > 255) {
-            throw new InvalidArgumentException('Value $green can only be 0 to 255');
-        }
-        if ($blue < 0 || $blue > 255) {
-            throw new InvalidArgumentException('Value $blue can only be 0 to 255');
+        if ($red < 0 || $red > 255 ||
+            $green < 0 || $green > 255 ||
+            $blue < 0 || $blue > 255) {
+            throw new InvalidArgumentException('Values $red, $blue and $green can only be 0 to 255');
         }
         $red /= 255;
         $green /= 255;
@@ -74,7 +70,7 @@ class Color
             $hue = ($max == $green) ? 60 * (($blue - $red) / $delta + 2) : $hue;
             $hue = ($max == $blue) ? 60 * (($red - $green) / $delta + 4) : $hue;
             if ($max == $red) {
-                $x = ($blue > green) ? 360 : 0;
+                $x = ($blue > $green) ? 360 : 0;
                 $hue = 60 * fmod((($green - $blue) / $delta), 6) + $x;
             }
 
@@ -120,14 +116,10 @@ class Color
      */
     public static function fromHSV($hue, $saturation, $value)
     {
-        if ($hue < 0 || $hue > 360) {
-            throw new InvalidArgumentException('Value $hue can only be 0 to 360');
-        }
-        if ($saturation < 0 || $saturation > 100) {
-            throw new InvalidArgumentException('Value $saturation can only be 0 to 100');
-        }
-        if ($value < 0 || $value > 100) {
-            throw new InvalidArgumentException('Value $value can only be 0 to 100');
+        if ($hue < 0 || $hue > 360 ||
+            $saturation < 0 || $saturation > 100 ||
+            $value < 0 || $value > 100) {
+            throw new InvalidArgumentException('Value $hue can only be 0 to 360, $saturation and $value can only be 0 to 100');
         }
         $hue /= 360;
         $saturation /= 100;
@@ -169,14 +161,10 @@ class Color
      */
     public static function fromHSL($hue, $saturation, $lightness)
     {
-        if ($hue < 0 || $hue > 360) {
-            throw new InvalidArgumentException('Value $hue can only be 0 to 360');
-        }
-        if ($saturation < 0 || $saturation > 100) {
-            throw new InvalidArgumentException('Value $saturation can only be 0 to 100');
-        }
-        if ($lightness < 0 || $lightness > 100) {
-            throw new InvalidArgumentException('Value $lightness can only be 0 to 100');
+        if ($hue < 0 || $hue > 360 ||
+            $saturation < 0 || $saturation > 100 ||
+            $lightness < 0 || $lightness > 100) {
+            throw new InvalidArgumentException('Value $hue can only be 0 to 360, $saturation and $lightness can only be 0 to 100');
         }
 
         return new self($hue, $saturation, $lightness);
@@ -275,9 +263,9 @@ class Color
      */
     public function toHSLString()
     {
-        $hsl = $this->toHSL();
+        list($hue, $saturation, $lightness) = $this->toHSL();
 
-        return "hsl($hsl[0], $hsl[1], $hsl[2])";
+        return "hsl($hue, $saturation, $lightness)";
     }
 
     /**
@@ -297,29 +285,17 @@ class Color
     	$x = $c * ( 1 - abs( fmod( ( $h / 60 ), 2 ) - 1 ) );
     	$m = $l - ( $c / 2 );
     	if ( $h < 60 ) {
-    		$r = $c;
-    		$g = $x;
-    		$b = 0;
+            list($r, $g, $b) = [$c, $x, 0];
     	} else if ( $h < 120 ) {
-    		$r = $x;
-    		$g = $c;
-    		$b = 0;
+            list($r, $g, $b) = [$x, $c, 0];
     	} else if ( $h < 180 ) {
-    		$r = 0;
-    		$g = $c;
-    		$b = $x;
+            list($r, $g, $b) = [0, $c, $x];
     	} else if ( $h < 240 ) {
-    		$r = 0;
-    		$g = $x;
-    		$b = $c;
+            list($r, $g, $b) = [0, $x, $c];
     	} else if ( $h < 300 ) {
-    		$r = $x;
-    		$g = 0;
-    		$b = $c;
+            list($r, $g, $b) = [$x, 0, $c];
     	} else {
-    		$r = $c;
-    		$g = 0;
-    		$b = $x;
+            list($r, $g, $b) = [$c, 0, $x];
     	}
     	$r = ( $r + $m ) * 255;
     	$g = ( $g + $m ) * 255;
@@ -339,9 +315,8 @@ class Color
      */
     public function toRGBString()
     {
-        $rgb = $this->toRGB();
-
-        return "rgb($rgb[0], $rgb[1], $rgb[2])";
+        list($red, $green, $blue) = $this->toRGB();
+        return "rgb($red, $green, $blue)";
     }
 
     /**
@@ -351,8 +326,8 @@ class Color
      */
     public function toHEX()
     {
-        $rgb = $this->toRGB();
-        return strtoupper(sprintf("#%02x%02x%02x", $rgb[0], $rgb[1], $rgb[2]));
+        list($red, $green, $blue) = $this->toRGB();
+        return strtoupper(sprintf("#%02x%02x%02x", $red, $green, $blue));
     }
 
     /**
@@ -364,4 +339,55 @@ class Color
     {
         return $this->toHEX();
     }
+
+    /**
+     * Outputs the color using the HSV format.
+     *
+     * @return array HSV representation of the color
+     */
+    public function toHSV()
+    {
+        list($red, $green, $blue) = $this->toRGB();
+        $red /= 255;
+        $green /= 255;
+        $blue /= 255;
+
+        $maxRGB = max($red, $green, $blue);
+        $minRGB = min($red, $green, $blue);
+        $chroma = $maxRGB - $minRGB;
+
+        $value = 100 * $maxRGB;
+
+        if ($chroma == 0)
+            return [0, 0, $value];
+
+        $saturation = 100 * ($chroma / $maxRGB);
+
+        if ($red == $minRGB)
+            $h = 3 - (($green - $blue) / $chroma);
+        elseif ($blue == $minRGB)
+            $h = 1 - (($red - $green) / $chroma);
+        else
+            $h = 5 - (($blue - $red) / $chroma);
+
+        $hue = 60 * $h;
+
+        return [
+            round($hue),
+            round($saturation),
+            round($value)
+        ];
+    }
+
+    /**
+     * Outputs the color using the HSV format.
+     *
+     * @return string HSV representation of the color using CSS format
+     */
+     public function toHSVString()
+     {
+         list($hue, $saturation, $value) = $this->toHSV();
+         return "hsv($hue, $saturation, $value)";
+     }
+
 }

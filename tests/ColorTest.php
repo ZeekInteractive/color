@@ -73,7 +73,14 @@ final class ColorTest extends TestCase
         $this->assertEquals('hsl(200, 80, 40)', $hslString);
     }
 
-    //TODO: conversion to hsv
+    public function testColorConversionToHsv()
+    {
+        $hsv = Color::fromHSV(200, 80, 40)->toHSV();
+        $this->assertEquals([200, 80, 40], $hsv);
+
+        $hsvString = Color::fromHSV(200, 80, 40)->toHSVString();
+        $this->assertEquals('hsv(200, 80, 40)', $hsvString);
+    }
 
     public function testColorAlterationDarken()
     {
