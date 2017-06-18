@@ -4,29 +4,29 @@ namespace Liquidpineapple;
 
 use InvalidArgumentException;
 
-class Color {
-
+class Color
+{
     /**
-     * @var int $hue (0-360), The H-value in HSL
+     * @var int (0-360), The H-value in HSL
      */
     private $hue;
 
     /**
-     * @var int $saturation (0-100), The S-value in HSL
+     * @var int (0-100), The S-value in HSL
      */
     private $saturation;
 
     /**
-     * @var int $lightness (0-100), The L-value in HSL
+     * @var int (0-100), The L-value in HSL
      */
     private $lightness;
 
     /**
-     * Creates a Color instance
+     * Creates a Color instance.
      *
-     * @param int|null $hue (0-360) The hue of the color (format: HSL)
+     * @param int|null $hue        (0-360) The hue of the color (format: HSL)
      * @param int|null $saturation (0-100) The saturation of the color (format: HSL)
-     * @param int|null $lightness (0-100) The lightness of the color (format: HSL)
+     * @param int|null $lightness  (0-100) The lightness of the color (format: HSL)
      *
      * @return void
      */
@@ -38,11 +38,11 @@ class Color {
     }
 
     /**
-     * Creates a Color instance based on the given RGB-formatted color
+     * Creates a Color instance based on the given RGB-formatted color.
      *
-     * @param int $red (0-255) The red value of the given color
+     * @param int $red   (0-255) The red value of the given color
      * @param int $green (0-255) The green value of the given color
-     * @param int $blue (0-255) The blue value of the given color
+     * @param int $blue  (0-255) The blue value of the given color
      *
      * @return Color
      */
@@ -83,7 +83,7 @@ class Color {
     }
 
     /**
-     * Creates a Color instance based on the given Hexadecimal-formatted color
+     * Creates a Color instance based on the given Hexadecimal-formatted color.
      *
      * @param string $hex A hexadecimal color value, the # isn't required but can be given
      *
@@ -110,11 +110,11 @@ class Color {
     }
 
     /**
-     * Creates a Color instance based on the given HSV-formatted color
+     * Creates a Color instance based on the given HSV-formatted color.
      *
-     * @param int $hue (0-360) The hue of the color (format: HSV)
+     * @param int $hue        (0-360) The hue of the color (format: HSV)
      * @param int $saturation (0-100) The saturation of the color (format: HSV)
-     * @param int $value (0-100) The value of the color (format: HSV)
+     * @param int $value      (0-100) The value of the color (format: HSV)
      *
      * @return Color
      */
@@ -159,11 +159,11 @@ class Color {
     }
 
     /**
-     * Creates a Color instance based on the given HSL-formatted color
+     * Creates a Color instance based on the given HSL-formatted color.
      *
-     * @param int $hue (0-360) The hue of the color (format: HSL)
+     * @param int $hue        (0-360) The hue of the color (format: HSL)
      * @param int $saturation (0-100) The saturation of the color (format: HSL)
-     * @param int $lightness (0-100) The lightness of the color (format: HSL)
+     * @param int $lightness  (0-100) The lightness of the color (format: HSL)
      *
      * @return Color
      */
@@ -178,11 +178,12 @@ class Color {
         if ($lightness < 0 || $lightness > 100) {
             throw new InvalidArgumentException('Value $lightness can only be 0 to 100');
         }
+
         return new self($hue, $saturation, $lightness);
     }
 
     /**
-     * Alters the color by lightening it with the given percentage
+     * Alters the color by lightening it with the given percentage.
      *
      * @param int $amount (0-100) Percentage with which to lighten the color
      *
@@ -200,7 +201,7 @@ class Color {
     }
 
     /**
-     * Alters the color by darkening it with the given percentage
+     * Alters the color by darkening it with the given percentage.
      *
      * @param int $amount (0-100) Percentage with which to darken the color
      *
@@ -218,7 +219,7 @@ class Color {
     }
 
     /**
-     * Alters the color by saturating it with the given percentage
+     * Alters the color by saturating it with the given percentage.
      *
      * @param int $amount (0-100) Percentage with which to saturate the color
      *
@@ -236,7 +237,7 @@ class Color {
     }
 
     /**
-     * Alters the color by desaturating it with the given percentage
+     * Alters the color by desaturating it with the given percentage.
      *
      * @param int $amount (0-100) Percentage with which to desaturate the color
      *
@@ -254,7 +255,7 @@ class Color {
     }
 
     /**
-     * Outputs the color using the HSL format
+     * Outputs the color using the HSL format.
      *
      * @return array HSL representation of the color
      */
@@ -268,7 +269,7 @@ class Color {
     }
 
     /**
-     * Outputs the color using the HSL format
+     * Outputs the color using the HSL format.
      *
      * @return string HSL representation of the color using CSS syntax
      */
