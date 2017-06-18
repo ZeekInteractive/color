@@ -4,6 +4,10 @@ php:
 - 7.0
 - 7.1
 
+addons:
+  code_climate:
+    repo_token: 45818730a22e045eb76fddf6a2e987ddefecb491ae607d7942da18407d2bd4b2
+
 branches:
   only:
   - master
@@ -14,3 +18,6 @@ before_script:
 
 script:
 - vendor/bin/phpunit --testdox
+
+after_success:
+  - vendor/bin/test-reporter
