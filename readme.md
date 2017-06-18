@@ -1,8 +1,9 @@
-<p align="center"><strong>liquidpineapple/color</strong> 🌈</p>
+<p align="center"><img src="http://liquidpineapple.o.auroraobjects.eu/img/colors1.jpg" /></p>
 
 <p align="center">
 <a href="https://travis-ci.org/liquidpineapple/color"><img src="https://travis-ci.org/liquidpineapple/color.svg" alt="Build Status"></a>
 <a href="https://styleci.io/repos/94641763"><img src="https://styleci.io/repos/94641763/shield?branch=master" alt="StyleCI"></a>
+<a href="https://codeclimate.com/github/liquidpineapple/color/coverage"><img src="https://codeclimate.com/github/liquidpineapple/color/badges/coverage.svg" /></a>
 </p>
 <p align="center">
 <a href="https://waffle.io/liquidpineapple/color?utm_source=badge"><img src="https://badge.waffle.io/liquidpineapple/color.png?label=ready&title=Ready" alt="Stories in Ready" /></a>
