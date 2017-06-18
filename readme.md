@@ -1,4 +1,6 @@
-<p align="center"><img src="http://liquidpineapple.o.auroraobjects.eu/img/colors1.jpg" /></p>
+<p align="center">
+<a href="https://liquidpineapple.net"><img src="http://liquidpineapple.o.auroraobjects.eu/img/colors1.jpg" /></a>
+</p>
 
 <p align="center">
 <a href="https://travis-ci.org/liquidpineapple/color"><img src="https://travis-ci.org/liquidpineapple/color.svg" alt="Build Status"></a>
