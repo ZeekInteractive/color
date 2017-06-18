@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 use Liquidpineapple\Color;
@@ -47,5 +48,4 @@ final class ColorTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         Color::fromHSV(-10, 300, 100);
     }
-
 }
