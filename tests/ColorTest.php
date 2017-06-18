@@ -5,9 +5,6 @@ declare(strict_types=1);
 use Liquidpineapple\Color;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers Color
- */
 final class ColorTest extends TestCase
 {
     public function testColorConversionFromHexadecimal()
