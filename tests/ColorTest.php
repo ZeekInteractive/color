@@ -98,5 +98,4 @@ final class ColorTest extends TestCase
         $dullColor = Color::fromHEX('#1E90FF')->desaturate(10)->toHEX();
         $this->assertEquals('#2990F4', $dullColor);
     }
-
 }
