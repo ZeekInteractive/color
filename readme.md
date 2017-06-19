@@ -30,7 +30,7 @@ You can install this package through composer. To install the latest version in 
 composer require liquidpineapple/color
 ```
 
-This package required PHP 7.0 or higher.
+This package requires PHP 7.0 or higher.
 
 # Documentation
 
