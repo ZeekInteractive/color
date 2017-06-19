@@ -1,5 +1,5 @@
 <p align="center">
-<a href="https://liquidpineapple.net"><img src="http://liquidpineapple.o.auroraobjects.eu/img/colors1.jpg" /></a>
+<a href="https://liquidpineapple.net"><img src="http://liquidpineapple.o.auroraobjects.eu/img/color.jpg" /></a>
 </p>
 
 <p align="center">
