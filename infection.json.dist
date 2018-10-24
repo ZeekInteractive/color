@@ -1,0 +1,12 @@
+{
+    "bootstrap": "./tests/bootstrap.php",
+    "timeout": 10,
+    "source": {
+        "directories": [
+            "src"
+        ]
+    },
+    "logs": {
+        "text": "build\/infection-log.txt"
+    }
+}
