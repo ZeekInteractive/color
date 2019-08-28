@@ -1,5 +1,5 @@
 {
-    "name": "liquidpineapple/color",
+    "name": "zeek/color",
     "description": "A micro PHP package to convert and alter colors! 🌈",
     "type": "library",
     "require-dev": {
