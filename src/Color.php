@@ -37,6 +37,18 @@ class Color
         $this->lightness = $lightness;
     }
 
+    public function lightness() {
+    	return $this->lightness;
+    }
+
+    public function saturation() {
+    	return $this->saturation;
+    }
+
+    public function hue() {
+    	return $this->hue;
+    }
+
     /**
      * Creates a Color instance based on the given RGB-formatted color.
      *
@@ -179,13 +191,24 @@ class Color
      */
     public function lighten($amount)
     {
-        if ($amount < 0 || $amount > 100) {
-            throw new InvalidArgumentException('The given amount must be between 0 and 100');
-        }
+    	$amount = $this->validateAmount($amount);
+
         $amount /= 100;
         $this->lightness += (100 - $this->lightness) * $amount;
 
         return $this;
+    }
+
+    private function validateAmount( $amount ) {
+	    if ( $amount < 0 ) {
+		    $amount = 0;
+	    }
+
+	    if ( $amount > 100 ) {
+		    $amount = 100;
+	    }
+
+	    return $amount;
     }
 
     /**
@@ -197,9 +220,8 @@ class Color
      */
     public function darken($amount)
     {
-        if ($amount < 0 || $amount > 100) {
-            throw new InvalidArgumentException('The given amount must be between 0 and 100');
-        }
+	    $amount = $this->validateAmount($amount);
+
         $amount /= 100;
         $this->lightness -= $this->lightness * $amount;
 
@@ -215,9 +237,8 @@ class Color
      */
     public function saturate($amount)
     {
-        if ($amount < 0 || $amount > 100) {
-            throw new InvalidArgumentException('The given amount must be between 0 and 100');
-        }
+	    $amount = $this->validateAmount($amount);
+
         $amount /= 100;
         $this->saturation += (100 - $this->saturation) * $amount;
 
@@ -233,9 +254,7 @@ class Color
      */
     public function desaturate($amount)
     {
-        if ($amount < 0 || $amount > 100) {
-            throw new InvalidArgumentException('The given amount must be between 0 and 100');
-        }
+	    $amount = $this->validateAmount($amount);
         $amount /= 100;
         $this->saturation -= $this->saturation * $amount;
 
